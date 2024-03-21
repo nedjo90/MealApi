@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MealApi", "MealApi\MealApi.csproj", "{AA58B5AF-996D-4454-A802-7FBF1B9E047E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA58B5AF-996D-4454-A802-7FBF1B9E047E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA58B5AF-996D-4454-A802-7FBF1B9E047E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA58B5AF-996D-4454-A802-7FBF1B9E047E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA58B5AF-996D-4454-A802-7FBF1B9E047E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
