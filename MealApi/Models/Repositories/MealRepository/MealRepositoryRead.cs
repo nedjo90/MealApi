@@ -14,21 +14,28 @@ public static partial class MealRepository
         return _listOfMeal.FirstOrDefault(x => x.Id == id);
     }
     
-    public static List<Meal> GetSortedMealsByName(bool sort)
+    public static List<Meal> GetMealsByName(bool? sort = null, string? name = null)
     {
-        return sort ?  GetAllMealsByNameAsc() : GetAllMealsByNameDesc();
+        List<Meal> listOfMeal = _listOfMeal;
+        if (name != null)
+            listOfMeal = _listOfMeal.FindAll(x => x.Name != null && x.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        if (sort != null)
+            return sort == true ?  GetAllMealsByNameAsc(listOfMeal) : GetAllMealsByNameDesc(listOfMeal);
+        return listOfMeal;
     }
 
-    public static List<Meal> GetAllMealsByNameDesc()
+    public static List<Meal> GetAllMealsByNameDesc(List<Meal>? listOfMeal = null)
     {
-        List<Meal> descList = _listOfMeal.OrderByDescending(x => x.Name).ToList();
-        return descList;
+        if (listOfMeal == null)
+            return _listOfMeal.OrderByDescending(x => x.Name).ToList();
+        return listOfMeal.OrderByDescending(x => x.Name).ToList();
     }
     
-    public static List<Meal> GetAllMealsByNameAsc()
+    public static List<Meal> GetAllMealsByNameAsc(List<Meal>? listOfMeal = null)
     {
-        List<Meal> ascList = _listOfMeal.OrderBy(x => x.Name).ToList();
-        return ascList;
+        if (listOfMeal == null)
+            return _listOfMeal.OrderBy(x => x.Name).ToList();
+        return listOfMeal.OrderBy(x => x.Name).ToList();
     }
 
     public static List<Meal> GetSortedMealsByKCal(bool sort)
@@ -65,7 +72,7 @@ public static partial class MealRepository
 
     public static List<Meal> GetMealsByName(string name)
     {
-        List<Meal> listOfMeals = _listOfMeal.Where(x => x.Name == name).ToList();
+        List<Meal> listOfMeals = _listOfMeal.FindAll(x => x.Name == name);
         return listOfMeals;
     }
 }

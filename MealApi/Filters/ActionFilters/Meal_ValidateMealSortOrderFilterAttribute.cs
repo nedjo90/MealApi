@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MealApi.Filters.ActionFilters;
 
-public class Meal_ValidateMealSortOrderFilterAttribute : ActionFilterAttribute
+public class MealValidateMealSortOrderFilterAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
+        
         bool? mealSort = context.ActionArguments["sort"] as bool?;
         if (mealSort == null)
         {

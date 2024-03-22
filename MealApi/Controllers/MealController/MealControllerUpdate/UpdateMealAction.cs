@@ -1,11 +1,10 @@
 using MealApi.Filters.ActionFilters;
 using MealApi.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MealApi.Controllers.MealController;
+namespace MealApi.Controllers.MealController.MealControllerUpdate;
 
-public partial class MealController
+public class UpdateMealAction : MealController
 {
     [HttpPut("{id}")]
     [Meal_ValidateMealIdFilter]
