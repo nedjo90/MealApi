@@ -7,8 +7,8 @@ namespace MealApi.Controllers.MealController.MealControllerUpdate;
 public class UpdateMealAction : MealController
 {
     [HttpPut("{id}")]
-    [Meal_ValidateMealIdFilter]
-    [Meal_ValidateUpdateMealFilter]
+    [MealValidateMealIdFilter]
+    [MealValidateUpdateMealFilter]
     public IActionResult UpdateMeal(int id, Meal meal)
     {
         return NoContent();

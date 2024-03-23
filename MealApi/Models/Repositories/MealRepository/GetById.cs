@@ -1,14 +1,12 @@
 using System.Data;
-using System.Data.Common;
 using MealApi.DTO.Responses;
-using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 
-namespace MealApi.Models.Repositories;
+namespace MealApi.Models.Repositories.MealRepository;
 
-public class MealTestMySql(MySqlDataSource database)
+public class GetById(MySqlDataSource database)
 {
-    public async Task<MealGetByIdResponse?> FindOneAsync(int id)
+    public async Task<MealGetByIdResponse?> GetByIdAsync(int id)
     {
         await using MySqlConnection connection = await database.OpenConnectionAsync();
         string query = $"SELECT * FROM meal_table WHERE id = {id}";
@@ -20,7 +18,8 @@ public class MealTestMySql(MySqlDataSource database)
         {
             Id = Convert.ToInt32(dataTable.Rows[0]["id"]),
             Name = Convert.ToString(dataTable.Rows[0]["name"]),
-            KCal = Convert.ToInt32(dataTable.Rows[0]["kcal"])
+            KCal = Convert.ToInt32(dataTable.Rows[0]["kcal"]),
+            Country = Convert.ToString(dataTable.Rows[0]["country"])
         };
         return resp;
     }

@@ -1,13 +1,17 @@
-using MealApi.Models.Repositories;
+using MealApi.Models.Repositories.MealRepository.SqlRequest;
 using Microsoft.AspNetCore.Mvc;
+using MySqlConnector;
 
 namespace MealApi.Controllers.MealController.MealControllerRead;
 
 public class GetAllMealsAction : MealController
 {
     [HttpGet]
-    public IActionResult GetAllMeals()
+    public async Task<IActionResult> GetAllMeals([FromServices] MySqlDataSource db)
     {
-        return Ok(MealRepository.GetAllMeals());
+        GetAllSqlRequest allSqlRequest = new GetAllSqlRequest(db);
+        var list = await allSqlRequest.GetAllAsync();
+        return Ok(list);
     }
+
 }

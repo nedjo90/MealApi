@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+namespace MealApi.Models.Repositories.MealRepository;
 
-namespace MealApi.Models.Repositories;
-
-public static partial class MealRepository 
+public static partial class MealRepositoryInMemory 
 {
     public static List<Meal> GetAllMeals()
     {

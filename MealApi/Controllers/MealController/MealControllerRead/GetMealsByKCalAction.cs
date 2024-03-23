@@ -1,6 +1,7 @@
 using MealApi.Filters.ActionFilters;
 using MealApi.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using MealRepositoryInMemory = MealApi.Models.Repositories.MealRepository.MealRepositoryInMemory;
 
 namespace MealApi.Controllers.MealController.MealControllerRead;
 
@@ -10,6 +11,6 @@ public class GetMealsByKCalAction : MealController
     [MealValidateMealSortOrderFilter]
     public IActionResult GetAllMealsSortedByKCal([FromQuery] bool sort)
     {
-        return Ok(MealRepository.GetSortedMealsByKCal(sort));
+        return Ok(MealRepositoryInMemory.GetSortedMealsByKCal(sort));
     }
 }

@@ -7,4 +7,6 @@ public class MealGetByIdResponse
     public string? Name { get; set; }
 
     public int? KCal { get; set; }
+    
+    public string? Country { get; set;}
 }

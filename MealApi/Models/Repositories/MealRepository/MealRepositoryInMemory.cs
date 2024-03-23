@@ -1,6 +1,6 @@
-namespace MealApi.Models.Repositories;
+namespace MealApi.Models.Repositories.MealRepository;
 
-public static partial class MealRepository
+public static partial class MealRepositoryInMemory
 {
     static List<Meal> _listOfMeal = new List<Meal>()
     {

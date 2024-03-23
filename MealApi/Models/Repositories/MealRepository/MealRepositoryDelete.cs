@@ -1,6 +1,6 @@
-namespace MealApi.Models.Repositories;
+namespace MealApi.Models.Repositories.MealRepository;
 
-public partial class MealRepository
+public partial class MealRepositoryInMemory
 {
     
 }

@@ -2,10 +2,11 @@ using MealApi.Models;
 using MealApi.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using MealRepositoryInMemory = MealApi.Models.Repositories.MealRepository.MealRepositoryInMemory;
 
 namespace MealApi.Filters.ActionFilters;
 
-public class Meal_ValidateCreateMealFilterAttribute : ActionFilterAttribute
+public class MealValidateCreateMealFilterAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
@@ -21,7 +22,7 @@ public class Meal_ValidateCreateMealFilterAttribute : ActionFilterAttribute
         }
         else
         {
-            Meal? existingMeal = MealRepository.GetMealProperties(meal.Name, meal.KCal, meal.Country);
+            Meal? existingMeal = MealRepositoryInMemory.GetMealProperties(meal.Name, meal.KCal, meal.Country);
             if (existingMeal != null)
             {
                 context.ModelState.AddModelError("Meal", $"{meal.Name} already exist");
