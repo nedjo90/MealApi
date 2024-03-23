@@ -1,26 +1,27 @@
+using MealApi.DTO.Responses;
 using MealApi.Models.Repositories.MealRepository.DBConfig;
 using MySqlConnector;
 
 namespace MealApi.Models.Repositories.MealRepository.SqlRequest;
 
-public class GetAllSqlRequest : MyDbReader
+public class GetAllMeals : MyDbReader
 {
-    public GetAllSqlRequest(MySqlDataSource dataBase) : base(dataBase)
+    public GetAllMeals(MySqlDataSource dataBase) : base(dataBase)
     {
          Query = $"SELECT * FROM meal_table";
     }
     
-    public async Task<List<Meal>?> GetAllAsync()
+    public async Task<List<GetAMealResponse>?> GetAllAsync()
     {
         await InitializeDbDataReader();
         if (Reader == null)
             return null;
-        List<Meal> list = new List<Meal>();
+        List<GetAMealResponse> list = new List<GetAMealResponse>();
         await using (Reader)
         {
             while (await Reader.ReadAsync())
             {
-                Meal meal = new Meal
+                GetAMealResponse meal = new GetAMealResponse()
                 {
                     Id = Reader.GetInt32(0),
                     Name = Reader.GetString(1),
@@ -30,6 +31,7 @@ public class GetAllSqlRequest : MyDbReader
                 list.Add(meal);
             }
         }
+        await DisposeReader();
         return list;
     }
 }

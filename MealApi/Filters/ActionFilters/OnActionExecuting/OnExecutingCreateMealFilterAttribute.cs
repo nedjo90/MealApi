@@ -1,12 +1,11 @@
 using MealApi.Models;
-using MealApi.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using MealRepositoryInMemory = MealApi.Models.Repositories.MealRepository.MealRepositoryInMemory;
 
-namespace MealApi.Filters.ActionFilters;
+namespace MealApi.Filters.ActionFilters.OnActionExecuting;
 
-public class MealValidateCreateMealFilterAttribute : ActionFilterAttribute
+public class OnExecutingCreateMealFilterAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {

@@ -20,4 +20,10 @@ public class MyDbConnector
             Connection = await _dataBase.OpenConnectionAsync();
     }
 
+    protected async Task DisposeConnection()
+    {
+        if (Connection != null)
+            await Connection.DisposeAsync();
+    }
+
 }

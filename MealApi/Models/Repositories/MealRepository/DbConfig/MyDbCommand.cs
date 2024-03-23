@@ -23,4 +23,10 @@ public class MyDbCommand : MyDbConnector
             Command.CommandText = Query;
         }
     }
+    protected async Task DisposeCommand()
+    {
+        if (Command != null)
+            await Command.DisposeAsync();
+        await DisposeConnection();
+    }
 }

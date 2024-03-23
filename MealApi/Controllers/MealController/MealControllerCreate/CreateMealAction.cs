@@ -1,5 +1,6 @@
 using MealApi.Controllers.MealController.MealControllerRead;
 using MealApi.Filters.ActionFilters;
+using MealApi.Filters.ActionFilters.OnActionExecuting;
 using MealApi.Models;
 using MealApi.Models.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace MealApi.Controllers.MealController.MealControllerCreate;
 public class CreateMealAction : MealController
 {
     [HttpPost]
-    [MealValidateCreateMealFilter]
+    [OnExecutingCreateMealFilter]
     public IActionResult CreateMeal(Meal meal)
     {
         MealRepositoryInMemory.CreateMeal(meal);

@@ -2,9 +2,9 @@ using MealApi.Models;
 
 namespace MealApi.DTO.Responses;
 
-public class MealGetAllResponse
+public class GetAllMealsResponse
 {
-    public List<Meal>? ListOfMeal {
+    public List<GetAMealResponse>? ListOfMeal {
         get;
         set;
     }
