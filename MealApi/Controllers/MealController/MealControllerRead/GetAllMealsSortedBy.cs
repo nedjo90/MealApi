@@ -1,19 +1,18 @@
-using MealApi.Filters.ActionFilters.OnActionExecuted;
 using MealApi.Filters.ActionFilters.OnActionExecuting;
-using MealApi.Models.Repositories.MealRepository.SqlRequest;
+using MealApi.Models.Repositories.MealRepository.SqlQuery;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 
 namespace MealApi.Controllers.MealController.MealControllerRead;
 
-public class GetAllMealsBy : MealController
+public class GetAllMealsSortedBy : MealController
 {
     [OnExecutingMealSortFilter]
     [HttpGet]
     public async Task<IActionResult> GetMealsByCountryAction
         ([FromServices] MySqlDataSource db,[FromQuery]string sortKey,[FromQuery] bool sort)
     {
-        var getAllMealsSortedByCountry = new GetAllMealsSortedBy(db, sortKey,sort);
+        var getAllMealsSortedByCountry = new QueryGetAllMealsSortedBy(db, sortKey,sort);
         return Ok(await getAllMealsSortedByCountry.GetAllAsync());
     }
 }

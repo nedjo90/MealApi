@@ -14,7 +14,7 @@ public class MyDbCommand : MyDbConnector
         Query = null;
     }
 
-    protected async Task InitializeQueryCommand()
+    protected async Task InitializeCommand()
     {
         await CreateConnection();
         if (Connection != null)
@@ -23,6 +23,21 @@ public class MyDbCommand : MyDbConnector
             Command.CommandText = Query;
         }
     }
+
+    protected async Task<int> NonQueryAsync()
+    {
+        if (Command == null)
+            return 0;
+        return (await Command!.ExecuteNonQueryAsync());
+    }
+    
+    protected async Task<object?> ScalarAsync()
+    {
+        if (Command == null)
+            return null;
+        return (await Command!.ExecuteScalarAsync());
+    }
+    
     protected async Task DisposeCommand()
     {
         if (Command != null)

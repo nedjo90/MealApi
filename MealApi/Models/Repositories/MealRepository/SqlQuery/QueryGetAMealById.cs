@@ -1,19 +1,17 @@
-using System.Data;
-using System.Data.Common;
 using MealApi.DTO.Responses;
 using MealApi.Models.Repositories.MealRepository.DBConfig;
 using MySqlConnector;
 
-namespace MealApi.Models.Repositories.MealRepository.SqlRequest;
+namespace MealApi.Models.Repositories.MealRepository.SqlQuery;
 
-public class GetAMealById : MyDbReader 
+public class QueryGetAMealById : MyDbReader 
 {
-    public GetAMealById(MySqlDataSource dataBase, int id) : base(dataBase)
+    public QueryGetAMealById(MySqlDataSource dataBase, int id) : base(dataBase)
     {
         Query = $"SELECT * FROM meal_table WHERE id = {id}";
     }
     
-    public async Task<GetAMealResponse?> GetById()
+    public async Task<ResponseGetAMeal?> GetByIdAsync()
     {
         await InitializeDbDataReader();
         if (Reader == null)
@@ -22,7 +20,7 @@ public class GetAMealById : MyDbReader
         {
             if (!await Reader.ReadAsync())
                 return null;
-            GetAMealResponse getAMeal = new GetAMealResponse
+            ResponseGetAMeal responseGetAMeal = new ResponseGetAMeal
             {
                 Id = Reader.GetInt32(0),
                 Name = Reader.GetString(1),
@@ -30,7 +28,7 @@ public class GetAMealById : MyDbReader
                 Country = Reader.GetString(3)
             };
             await DisposeReader();
-            return getAMeal;
+            return responseGetAMeal;
         }
     }
 }

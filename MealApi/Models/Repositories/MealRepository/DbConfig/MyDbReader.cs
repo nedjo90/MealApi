@@ -14,7 +14,7 @@ public abstract class MyDbReader : MyDbCommand
 
     protected async Task InitializeDbDataReader()
     {
-        await InitializeQueryCommand();
+        await InitializeCommand();
         if (Command != null && !string.IsNullOrEmpty(Query))
             Reader = await Command.ExecuteReaderAsync();
     }
