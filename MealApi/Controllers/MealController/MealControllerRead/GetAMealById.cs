@@ -8,12 +8,12 @@ namespace MealApi.Controllers.MealController.MealControllerRead;
 
 public class GetAMealById : MealController
 {
-    [HttpGet("{id:int}")]
+    [HttpGet("{id}")]
     [OnExecutedMealIdFilter]
     [OnExecutingMealIdFilter]
     public async Task<IActionResult> GetAMealByIdAction([FromServices]MySqlDataSource db,int id)
     {
-        var query = new QueryGetAMealById(db, id);
-        return Ok(await query.GetByIdAsync());
+        var query = new QueryGetAMealBy(db, id);
+        return Ok(await query.GetByAsync());
     }
 }

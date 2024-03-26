@@ -9,7 +9,6 @@ public abstract class MyDbReader : MyDbCommand
     protected DbDataReader? Reader;
     protected MyDbReader(MySqlDataSource dataBase) : base(dataBase)
     {
-        Reader = null;
     }
 
     protected async Task InitializeDbDataReader()

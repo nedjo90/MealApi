@@ -34,4 +34,7 @@ public class QueryGetAllMeals : MyDbReader
         await DisposeReader();
         return list;
     }
+    protected override void SanitizeQuery()
+    {
+    }
 }

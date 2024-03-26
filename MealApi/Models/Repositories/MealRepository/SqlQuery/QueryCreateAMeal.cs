@@ -16,19 +16,24 @@ public class QueryCreateAMeal : MyDbCommand
             KCal = newMeal.KCal,
             Country = newMeal.Country
         };
-        Query = $"INSERT INTO meal_table (name, kcal, country) VALUES ('{newMeal.Name}', {newMeal.KCal}, '{newMeal.Country}');" +
-                $"SELECT LAST_INSERT_ID();";
+        Query = $"INSERT INTO meal_table (`name`, `kcal`, `country`) VALUES (@name, @kcal, @country); SELECT LAST_INSERT_ID();";
     }
 
-    public async Task<ResponseGetAMeal?> CreateAMealAsync()
+    public async Task<int> CreateAMealAsync()
     {
         await InitializeCommand();
         if (Command == null)
-            return null;
+            return 0;
         var id = await ScalarAsync();
-        if (id == null)
-            return null;
-        _meal.Id = Convert.ToInt32(id.ToString());
-        return _meal;
+        if (id == null || !int.TryParse(id.ToString(), out int newId))
+            return 0;
+        return newId;
+    }
+    
+    protected override void SanitizeQuery()
+    {
+        Command?.Parameters.AddWithValue("@name", _meal.Name);
+        Command?.Parameters.AddWithValue("@kcal", _meal.KCal);
+        Command?.Parameters.AddWithValue("@country", _meal.Country);
     }
 }

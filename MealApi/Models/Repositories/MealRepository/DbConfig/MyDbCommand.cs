@@ -2,7 +2,7 @@ using MySqlConnector;
 
 namespace MealApi.Models.Repositories.MealRepository.DBConfig;
 
-public class MyDbCommand : MyDbConnector
+public abstract class MyDbCommand : MyDbConnector
 {
     protected MySqlCommand? Command;
 
@@ -16,20 +16,17 @@ public class MyDbCommand : MyDbConnector
 
     protected async Task InitializeCommand()
     {
+
         await CreateConnection();
         if (Connection != null)
         {
             Command = Connection.CreateCommand();
             Command.CommandText = Query;
+            SanitizeQuery();
         }
     }
 
-    protected async Task<int> NonQueryAsync()
-    {
-        if (Command == null)
-            return 0;
-        return (await Command!.ExecuteNonQueryAsync());
-    }
+    protected abstract void SanitizeQuery();
     
     protected async Task<object?> ScalarAsync()
     {

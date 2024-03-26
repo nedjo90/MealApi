@@ -2,7 +2,7 @@ using MySqlConnector;
 
 namespace MealApi.Models.Repositories.MealRepository.DBConfig;
 
-public class MyDbConnector
+public abstract class MyDbConnector
 {
     protected MySqlConnection? Connection;
 
@@ -22,7 +22,7 @@ public class MyDbConnector
 
     protected async Task DisposeConnection()
     {
-        if (Connection != null)
+        if(Connection != null)
             await Connection.DisposeAsync();
     }
 
