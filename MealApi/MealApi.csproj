@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Filters\ActionFilters\OnActionExecuted\" />
       <Folder Include="Filters\ExceptionFilters\" />
       <Folder Include="Models\Validations\" />
     </ItemGroup>

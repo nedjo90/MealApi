@@ -1,6 +1,6 @@
 namespace MealApi.DTO.Responses;
 
-public class ResponseGetAMeal
+public class ResponseGetMeal
 {
     public int? Id { get; set; }
 

@@ -1,8 +1,8 @@
-using System.Data;
 using System.Data.Common;
+using MealApi.Models.Repositories.MealRepository.DBConfig;
 using MySqlConnector;
 
-namespace MealApi.Models.Repositories.MealRepository.DBConfig;
+namespace MealApi.Models.Repositories.DbConfig;
 
 public abstract class MyDbReader : MyDbCommand
 {

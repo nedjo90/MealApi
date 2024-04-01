@@ -1,4 +1,6 @@
+using MealApi.DTO.Requests;
 using MealApi.DTO.Responses;
+using MealApi.Models.Repositories.DbConfig;
 using MealApi.Models.Repositories.MealRepository.DBConfig;
 using MySqlConnector;
 
@@ -6,22 +8,35 @@ namespace MealApi.Models.Repositories.MealRepository.SqlQuery;
 
 public class QueryGetAllMeals : MyDbReader
 {
-    public QueryGetAllMeals(MySqlDataSource dataBase) : base(dataBase)
+    private string? _key;
+    
+    public QueryGetAllMeals(MySqlDataSource dataBase, RequestGetAllMeals? request) : base(dataBase)
     {
-         Query = $"SELECT * FROM meal_table";
+        _key = request?.Key;
+        Query = $"SELECT * FROM meal_table ORDER BY ";
+        if (request?.Key != null && !request.Key.Equals("id", StringComparison.CurrentCultureIgnoreCase))
+        {
+            Query += $"{request.Key}";
+        }
+        else
+        {
+            Query += "id";
+        }
+        if (request?.Sort != null && request.Sort == false)
+            Query += " DESC";
     }
     
-    public async Task<List<ResponseGetAMeal>?> GetAllAsync()
+    public async Task<List<ResponseGetMeal>?> GetAllAsync()
     {
         await InitializeDbDataReader();
         if (Reader == null)
             return null;
-        List<ResponseGetAMeal> list = new List<ResponseGetAMeal>();
+        List<ResponseGetMeal> list = new List<ResponseGetMeal>();
         await using (Reader)
         {
             while (await Reader.ReadAsync())
             {
-                ResponseGetAMeal meal = new ResponseGetAMeal()
+                ResponseGetMeal meal = new ResponseGetMeal()
                 {
                     Id = Reader.GetInt32(0),
                     Name = Reader.GetString(1),
@@ -34,7 +49,5 @@ public class QueryGetAllMeals : MyDbReader
         await DisposeReader();
         return list;
     }
-    protected override void SanitizeQuery()
-    {
-    }
+    protected override void SanitizeQuery(){}
 }

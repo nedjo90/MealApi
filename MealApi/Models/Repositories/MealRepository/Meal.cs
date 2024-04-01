@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
-namespace MealApi.Models;
+namespace MealApi.Models.Repositories.MealRepository;
 
 public class Meal
 {

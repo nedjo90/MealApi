@@ -4,7 +4,7 @@ namespace MealApi.DTO.Responses;
 
 public class ResponseGetAllMeals
 {
-    public List<ResponseGetAMeal>? ListOfMeal {
+    public List<ResponseGetMeal>? ListOfMeal {
         get;
         set;
     }

@@ -5,12 +5,12 @@ using MealApi.Models.Repositories.MealRepository.SqlQuery;
 using Microsoft.AspNetCore.Mvc;
 using MySqlConnector;
 
-namespace MealApi.Controllers.MealController.MealControllerCreate;
+namespace MealApi.Controllers.Meal;
 
-public class CreateAMeal : MealController
+public partial class MealController
 {
     [HttpPost]
-    [OnExecutingValidateMealArgumentFilter]
+    [IsDuplication]
     public async Task<IActionResult> CreateMeal([FromServices] MySqlDataSource db, RequestCreateAMeal meal)
     {
         try
@@ -19,7 +19,7 @@ public class CreateAMeal : MealController
             int lastId = await query.CreateAMealAsync();
             Console.WriteLine(lastId);
             if (lastId != 0)
-                return CreatedAtAction("GetAMealByIdAction", "GetAMealById", new {id = lastId}, new ResponseGetAMeal
+                return CreatedAtAction("GetMeal", new {id = lastId}, new ResponseGetMeal
                 {
                     Id = lastId,
                     Name = meal.Name,

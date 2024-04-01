@@ -7,10 +7,10 @@ namespace MealApi.Models.Repositories.MealRepository.SqlQuery;
 
 public class QueryCreateAMeal : MyDbCommand
 {
-    ResponseGetAMeal _meal;
+    private readonly ResponseGetMeal _meal;
     public QueryCreateAMeal(MySqlDataSource dataBase, RequestCreateAMeal newMeal) : base(dataBase)
     {
-        _meal = new ResponseGetAMeal
+        _meal = new ResponseGetMeal
         {
             Name = newMeal.Name,
             KCal = newMeal.KCal,
